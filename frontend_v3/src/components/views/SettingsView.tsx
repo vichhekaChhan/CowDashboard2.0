@@ -318,9 +318,9 @@ export default function SettingsView({
               {!scanning && networks.length > 0 && (
                 <Box sx={{ display: 'flex', flexDirection: 'column', gap: 1 }}>
                   <Typography variant="caption" sx={{ fontWeight: 800, textTransform: 'uppercase', color: 'text.secondary', letterSpacing: '0.08em' }}>Nearby Networks Detected:</Typography>
-                  <Grid container spacing={2}>
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                     {networks.map((net) => (
-                      <Grid item xs={12} sm={6} key={net.ssid}>
+                      <div key={net.ssid}>
                         <Button
                           onClick={() => handleSelectNetwork(net.ssid)}
                           variant="outlined"
@@ -341,7 +341,7 @@ export default function SettingsView({
                           }}
                         >
                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, minWidth: 0 }}>
-                            <Wifi size={16} style={{ shrink: 0 }} />
+                            <Wifi size={16} style={{ flexShrink: 0 }} />
                             <Typography variant="caption" noWrap sx={{ fontFamily: 'monospace', fontWeight: 'bold' }}>{net.ssid}</Typography>
                           </Box>
                           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1, color: 'text.secondary', shrink: 0, fontFamily: 'monospace', fontSize: '0.625rem' }}>
@@ -349,9 +349,9 @@ export default function SettingsView({
                             <span>{net.signal}%</span>
                           </Box>
                         </Button>
-                      </Grid>
+                      </div>
                     ))}
-                  </Grid>
+                  </div>
                 </Box>
               )}
 
@@ -366,7 +366,7 @@ export default function SettingsView({
                     value={ssidField}
                     onChange={(e) => setSsidField(e.target.value)}
                     size="small"
-                    InputProps={{ sx: { borderRadius: 2.5, fontFamily: 'monospace', fontSize: '0.875rem' } }}
+                    sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2.5, fontFamily: 'monospace', fontSize: '0.875rem' } }}
                   />
                 </Box>
                 
@@ -389,7 +389,7 @@ export default function SettingsView({
                       onChange={(e) => setPasswordField(e.target.value)}
                       size="small"
                       fullWidth
-                      InputProps={{ sx: { borderRadius: 2.5, fontFamily: 'monospace', fontSize: '0.875rem' } }}
+                      sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2.5, fontFamily: 'monospace', fontSize: '0.875rem' } }}
                     />
                     
                     <Button
@@ -508,10 +508,8 @@ export default function SettingsView({
                 sx={{ p: 2, bgcolor: 'action.hover', border: '1px solid', borderColor: 'divider', borderRadius: 3, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
               >
                 <ListItemText
-                  primary="Capture beep feedback sound"
-                  secondary="Plays confirmation chime on client browser as soon as stable loads are locked."
-                  primaryTypographyProps={{ variant: 'body2', fontWeight: 800, fontSize: '0.8125rem' }}
-                  secondaryTypographyProps={{ variant: 'caption', fontSize: '0.6875rem' }}
+                  primary={<Typography variant="body2" sx={{ fontWeight: 800, fontSize: '0.8125rem' }}>Capture beep feedback sound</Typography>}
+                  secondary={<Typography variant="caption" sx={{ fontSize: '0.6875rem', color: 'text.secondary' }}>Plays confirmation chime on client browser as soon as stable loads are locked.</Typography>}
                 />
                 
                 <Button
@@ -529,10 +527,8 @@ export default function SettingsView({
                 sx={{ p: 2, bgcolor: 'action.hover', border: '1px solid', borderColor: 'divider', borderRadius: 3, display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}
               >
                 <ListItemText
-                  primary="Warning notifications trigger"
-                  secondary="Push notification banner visual indicators immediately on drastic weight drops."
-                  primaryTypographyProps={{ variant: 'body2', fontWeight: 800, fontSize: '0.8125rem' }}
-                  secondaryTypographyProps={{ variant: 'caption', fontSize: '0.6875rem' }}
+                  primary={<Typography variant="body2" sx={{ fontWeight: 800, fontSize: '0.8125rem' }}>Warning notifications trigger</Typography>}
+                  secondary={<Typography variant="caption" sx={{ fontSize: '0.6875rem', color: 'text.secondary' }}>Push notification banner visual indicators immediately on drastic weight drops.</Typography>}
                 />
                 
                 <Button

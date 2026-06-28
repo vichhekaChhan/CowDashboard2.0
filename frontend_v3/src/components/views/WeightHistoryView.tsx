@@ -81,13 +81,13 @@ export default function WeightHistoryView({
   // Sort & Filter
   const filteredRecords = weights
     .filter(rec => {
-      const cowName = getCowName(rec.cowId).toLowerCase();
-      const cowBreed = getCowBreed(rec.cowId).toLowerCase();
+      const cowName = (getCowName(rec.cowId) || '').toLowerCase();
+      const cowBreed = (getCowBreed(rec.cowId) || '').toLowerCase();
       const matchSearch = 
-        rec.cowId.toLowerCase().includes(search.toLowerCase()) || 
+        (rec.cowId || '').toLowerCase().includes(search.toLowerCase()) || 
         cowName.includes(search.toLowerCase()) || 
         cowBreed.includes(search.toLowerCase()) ||
-        rec.deviceId.toLowerCase().includes(search.toLowerCase());
+        (rec.deviceId || '').toLowerCase().includes(search.toLowerCase());
 
       const matchDevice = deviceFilter === 'ALL' || rec.deviceId === deviceFilter;
       const matchCow = cowFilter === 'ALL' || rec.cowId === cowFilter;
@@ -213,29 +213,29 @@ export default function WeightHistoryView({
 
       {/* Advanced filters card */}
       <Card sx={{ borderRadius: 4, border: '1px solid', borderColor: 'divider', boxShadow: '0 4px 12px rgba(0,0,0,0.02)', p: 2 }}>
-        <Grid container spacing={2}>
+        <div className="grid grid-cols-1 sm:grid-cols-4 gap-4">
           
           {/* Search TextField */}
-          <Grid item xs={12} sm={6}>
+          <div className="sm:col-span-2">
             <TextField
               fullWidth
               placeholder="Search by ID, cow name, breed, or scales..."
               value={search}
               onChange={(e) => { setSearch(e.target.value); setCurrentPage(1); }}
               size="small"
+              sx={{ '& .MuiOutlinedInput-root': { borderRadius: 2.5 } }}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start" sx={{ color: 'text.secondary' }}>
                     <Search size={16} />
                   </InputAdornment>
-                ),
-                sx: { borderRadius: 2.5 }
+                )
               }}
             />
-          </Grid>
+          </div>
 
           {/* Scale Device filter */}
-          <Grid item xs={12} sm={3}>
+          <div>
             <FormControl fullWidth size="small">
               <Select
                 value={deviceFilter}
@@ -248,10 +248,10 @@ export default function WeightHistoryView({
                 ))}
               </Select>
             </FormControl>
-          </Grid>
+          </div>
 
           {/* Cattle Unit filter */}
-          <Grid item xs={12} sm={3}>
+          <div>
             <FormControl fullWidth size="small">
               <Select
                 value={cowFilter}
@@ -266,9 +266,9 @@ export default function WeightHistoryView({
                 ))}
               </Select>
             </FormControl>
-          </Grid>
+          </div>
 
-        </Grid>
+        </div>
       </Card>
 
       {/* Audit ledger Table */}

@@ -122,12 +122,11 @@ export default function Layout({
                       <item.icon size={18} />
                     </ListItemIcon>
                     <ListItemText 
-                      primary={item.label} 
-                      primaryTypographyProps={{ 
-                        variant: 'body2', 
-                        fontWeight: isActive ? 700 : 500,
-                        fontSize: '0.8125rem'
-                      }} 
+                      primary={
+                        <Typography variant="body2" sx={{ fontWeight: isActive ? 700 : 500, fontSize: '0.8125rem' }}>
+                          {item.label}
+                        </Typography>
+                      } 
                     />
                     {item.id === 'dashboard' && alertCount > 0 && (
                       <Badge 

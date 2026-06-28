@@ -237,9 +237,10 @@ export default function CowDetailView({
                 cx={p.x} 
                 cy={p.y} 
                 r="10" 
-                fill="transparent" 
-                title={`${p.weight} kg on ${p.date}`} 
-              />
+                fill="transparent"
+              >
+                <title>{`${p.weight} kg on ${p.date}`}</title>
+              </circle>
               {/* Floating label */}
               <text 
                 x={p.x} 
@@ -276,7 +277,7 @@ export default function CowDetailView({
   };
 
   return (
-    <Box sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
+    <Box className="flex flex-col gap-4 p-6">
       
       {/* Header element */}
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2.5 }}>
@@ -303,192 +304,170 @@ export default function CowDetailView({
         </Box>
       </Box>
 
-      <Grid container spacing={4}>
-        
-        {/* Cow biographical details (Left 4 Columns) */}
-        <Grid item xs={12} lg={4} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          
-          <Card sx={{ borderRadius: 4, border: '1px solid', borderColor: 'divider', boxShadow: '0 4px 12px rgba(0,0,0,0.02)', overflow: 'hidden' }}>
-            
-            {/* Visual Head representation image */}
-            <Box sx={{ width: '100%', height: 180, bgcolor: 'rgba(46, 125, 50, 0.04)', position: 'relative', borderBottom: '1px solid', borderColor: 'divider', overflow: 'hidden' }}>
-              {cow.image ? (
-                <Box 
-                  component="img"
-                  src={cow.image} 
-                  alt={cow.name} 
-                  sx={{ 
-                    width: '100%', 
-                    height: '100%', 
-                    objectFit: 'cover',
-                    transition: 'transform 0.3s ease',
-                    '&:hover': { transform: 'scale(1.04)' }
-                  }} 
-                />
-              ) : (
-                <Box sx={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '4.5rem' }}>🐂</Box>
-              )}
-            </Box>
-
-            {/* Core genealogical Bio */}
-            <CardContent sx={{ p: 4, textAlign: 'center' }}>
-              <Typography variant="h6" sx={{ fontWeight: 900, color: 'text.primary', mb: 0.5 }}>
-                {cow.name}
-              </Typography>
-              <Chip 
-                label={`Registry ID: ${cow.cowId}`}
-                size="small"
-                sx={{ borderRadius: 1.5, fontSize: '0.625rem', fontWeight: 800, bgcolor: 'action.hover', color: 'text.secondary', border: '1px solid', borderColor: 'divider' }}
+      {/* Row 1: Top info row */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        {/* Cow Profile Card */}
+        <Card className="h-full" sx={{ borderRadius: 4, border: '1px solid', borderColor: 'divider', boxShadow: '0 4px 12px rgba(0,0,0,0.02)', overflow: 'hidden', display: 'flex', flexDirection: 'column' }}>
+          <Box sx={{ width: '100%', height: 180, bgcolor: 'rgba(46, 125, 50, 0.04)', position: 'relative', borderBottom: '1px solid', borderColor: 'divider', overflow: 'hidden' }}>
+            {cow.image ? (
+              <Box 
+                component="img"
+                src={cow.image} 
+                alt={cow.name} 
+                sx={{ 
+                  width: '100%', 
+                  height: '100%', 
+                  objectFit: 'cover',
+                  transition: 'transform 0.3s ease',
+                  '&:hover': { transform: 'scale(1.04)' }
+                }} 
               />
+            ) : (
+              <Box sx={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', fontSize: '4.5rem' }}>🐂</Box>
+            )}
+          </Box>
+          <CardContent sx={{ p: 4, textAlign: 'center', flex: 1 }}>
+            <Typography variant="h6" sx={{ fontWeight: 900, color: 'text.primary', mb: 0.5 }}>
+              {cow.name}
+            </Typography>
+            <Chip 
+              label={`Registry ID: ${cow.cowId}`}
+              size="small"
+              sx={{ borderRadius: 1.5, fontSize: '0.625rem', fontWeight: 800, bgcolor: 'action.hover', color: 'text.secondary', border: '1px solid', borderColor: 'divider' }}
+            />
+            <div className="grid grid-cols-2 gap-4 mt-6 text-left">
+              <Box sx={{ p: 1.75, bgcolor: 'action.hover', borderRadius: 2.5, border: '1px solid', borderColor: 'divider' }}>
+                <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 800, fontSize: '0.5625rem', textTransform: 'uppercase', display: 'block' }}>Breed</Typography>
+                <Typography variant="body2" noWrap sx={{ fontWeight: 800, color: 'text.primary', mt: 0.5 }}>
+                  {cow.breed}
+                </Typography>
+              </Box>
+              <Box sx={{ p: 1.75, bgcolor: 'action.hover', borderRadius: 2.5, border: '1px solid', borderColor: 'divider' }}>
+                <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 800, fontSize: '0.5625rem', textTransform: 'uppercase', display: 'block' }}>Gender</Typography>
+                <Typography variant="body2" sx={{ fontWeight: 800, color: 'info.main', mt: 0.5 }}>
+                  {cow.gender === 'Female' ? '♀ Female' : '♂ Male'}
+                </Typography>
+              </Box>
+              <Box className="col-span-2" sx={{ p: 2, bgcolor: 'action.hover', borderRadius: 2.5, border: '1px solid', borderColor: 'divider', display: 'flex', flexDirection: 'column', gap: 0.5 }}>
+                <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 800, fontSize: '0.5625rem', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: 0.5 }}>
+                  <Calendar size={12} className="text-[#2E7D32]" /> Birth Registration
+                </Typography>
+                <Typography variant="caption" sx={{ fontWeight: 800, color: 'text.primary', fontSize: '0.75rem', fontFamily: 'monospace' }}>
+                  {new Date(cow.birthDate).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
+                </Typography>
+              </Box>
+            </div>
+          </CardContent>
+        </Card>
 
-              <Grid container spacing={2} sx={{ mt: 3, textAlign: 'left' }}>
-                <Grid item xs={6}>
-                  <Box sx={{ p: 1.75, bgcolor: 'action.hover', borderRadius: 2.5, border: '1px solid', borderColor: 'divider' }}>
-                    <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 800, fontSize: '0.5625rem', textTransform: 'uppercase', display: 'block' }}>Breed</Typography>
-                    <Typography variant="body2" noWrap sx={{ fontWeight: 800, color: 'text.primary', mt: 0.5 }}>
-                      {cow.breed}
-                    </Typography>
-                  </Box>
-                </Grid>
-                <Grid item xs={6}>
-                  <Box sx={{ p: 1.75, bgcolor: 'action.hover', borderRadius: 2.5, border: '1px solid', borderColor: 'divider' }}>
-                    <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 800, fontSize: '0.5625rem', textTransform: 'uppercase', display: 'block' }}>Gender</Typography>
-                    <Typography variant="body2" sx={{ fontWeight: 800, color: 'info.main', mt: 0.5 }}>
-                      {cow.gender === 'Female' ? '♀ Female' : '♂ Male'}
-                    </Typography>
-                  </Box>
-                </Grid>
-                <Grid item xs={12}>
-                  <Box sx={{ p: 2, bgcolor: 'action.hover', borderRadius: 2.5, border: '1px solid', borderColor: 'divider', display: 'flex', flexDirection: 'column', gap: 0.5 }}>
-                    <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 800, fontSize: '0.5625rem', textTransform: 'uppercase', display: 'flex', alignItems: 'center', gap: 0.5 }}>
-                      <Calendar size={12} className="text-[#2E7D32]" /> Birth Registration
-                    </Typography>
-                    <Typography variant="caption" sx={{ fontWeight: 800, color: 'text.primary', fontSize: '0.75rem', fontFamily: 'monospace' }}>
-                      {cow.birthDate} ({new Date(cow.birthDate).toLocaleDateString(undefined, { year: 'numeric', month: 'long', day: 'numeric' })})
-                    </Typography>
-                  </Box>
-                </Grid>
-              </Grid>
-            </CardContent>
-
-          </Card>
-
-          {/* Health Assessment Alert Card */}
-          <Box sx={{ 
-            p: 2.5, 
-            bgcolor: healthBg, 
-            color: healthColor, 
-            borderRadius: 4, 
-            border: healthBorder,
-            display: 'flex', 
-            alignItems: 'flex-start', 
-            gap: 2 
-          }}>
-            <Heart className={`${healthHeartColor} shrink-0 mt-0.5`} size={20} />
+        {/* Metabolic Assessment Card */}
+        <Card className="h-full" sx={{ p: 4, borderRadius: 4, border: healthBorder, boxShadow: '0 4px 12px rgba(0,0,0,0.02)', display: 'flex', alignItems: 'center', justifyContent: 'center', bgcolor: healthBg, color: healthColor }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 3 }}>
+            <Heart className={`${healthHeartColor} shrink-0`} size={40} />
             <Box>
-              <Typography variant="caption" sx={{ fontWeight: 800, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block' }}>
+              <Typography variant="subtitle2" sx={{ fontWeight: 900, textTransform: 'uppercase', letterSpacing: '0.08em', display: 'block' }}>
                 Metabolic Assessment Score
               </Typography>
-              <Typography variant="caption" sx={{ fontWeight: 700, mt: 0.5, display: 'block', lineHeight: 1.4 }}>
+              <Typography variant="body1" sx={{ fontWeight: 700, mt: 1, display: 'block' }}>
                 {healthStatus}
               </Typography>
             </Box>
           </Box>
+        </Card>
+      </div>
 
-        </Grid>
+      {/* Row 2: Cattle Performance Metrics */}
+      <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2 }}>
+        <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
+          <Activity className="text-[#2E7D32]" size={20} />
+          <Typography variant="subtitle1" sx={{ fontWeight: 800, color: 'text.primary' }}>
+            {t('reports.performanceTable') || 'Cattle Performance Metrics'}
+          </Typography>
+        </Box>
+        
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3">
+          {[
+            { label: 'Weight Lock (Current)', value: latestWeight ? latestWeight.weight.toFixed(1) : '—', sub: latestWeight ? new Date(latestWeight.timestamp).toLocaleDateString() : 'Pending Weigh', unit: t('common.kg'), isLarge: true },
+            { label: 'Previous Weigh', value: previousWeight ? previousWeight.weight.toFixed(1) : '—', sub: previousWeight ? new Date(previousWeight.timestamp).toLocaleDateString() : 'N/A', unit: t('common.kg') },
+            { 
+              label: 'Total Weight Gain', 
+              value: totalGained >= 0 ? `+${totalGained.toFixed(1)}` : totalGained.toFixed(1), 
+              sub: `${growthPercentage >= 0 ? `+${growthPercentage.toFixed(1)}%` : `${growthPercentage.toFixed(1)}%`} Overall Growth`,
+              unit: t('common.kg'),
+              isDelta: true,
+              isPositive: totalGained >= 0
+            },
+            { label: 'Avg Daily Gain (ADG)', value: `+${adg.toFixed(2)}`, sub: `kg/day over past ${daysCycle} days`, unit: '', isADG: true }
+          ].map((item, idx) => (
+            <Box key={idx} className="h-[100px]" sx={{ p: 2, bgcolor: 'background.paper', borderRadius: 3, border: '1px solid', borderColor: 'divider', display: 'flex', flexDirection: 'column', justifyContent: 'space-between', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
+              <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 800, fontSize: '0.5625rem', textTransform: 'uppercase', display: 'block', letterSpacing: '0.04em' }}>
+                {item.label}
+              </Typography>
+              
+              <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 0.5 }}>
+                {item.isDelta ? (
+                  <Typography 
+                    variant="h6" 
+                    sx={{ 
+                      fontWeight: 900, 
+                      color: item.isPositive ? 'success.main' : 'error.main', 
+                      fontFamily: 'monospace',
+                      display: 'flex',
+                      alignItems: 'center',
+                      gap: 0.5,
+                      lineHeight: 1
+                    }}
+                  >
+                    {item.isPositive ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
+                    {item.value}
+                  </Typography>
+                ) : (
+                  <Typography variant="h6" sx={{ fontWeight: 900, color: item.isADG ? 'primary.main' : 'text.primary', fontFamily: 'monospace', lineHeight: 1 }}>
+                    {item.value}
+                  </Typography>
+                )}
+                {item.unit && (
+                  <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 'bold' }}>
+                    {item.unit}
+                  </Typography>
+                )}
+              </Box>
 
-        {/* Detailed growth trajectory analysis graphs and timeline (Right 8 Columns) */}
-        <Grid item xs={12} lg={8} sx={{ display: 'flex', flexDirection: 'column', gap: 4 }}>
-          
-          <Card sx={{ p: 4, borderRadius: 4, border: '1px solid', borderColor: 'divider', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 4 }}>
-              <Activity className="text-[#2E7D32]" size={20} />
-              <Typography variant="subtitle1" sx={{ fontWeight: 800, color: 'text.primary' }}>
-                {t('reports.performanceTable')}
+              <Typography variant="caption" noWrap sx={{ color: 'text.secondary', display: 'block', fontSize: '0.625rem', fontWeight: 600 }}>
+                {item.sub}
               </Typography>
             </Box>
+          ))}
+        </div>
+      </Box>
 
-            {/* Performance metrics row */}
-            <Grid container spacing={3} sx={{ mb: 4 }}>
-              {[
-                { label: 'Weight Lock (Current)', value: latestWeight ? latestWeight.weight.toFixed(1) : '—', sub: latestWeight ? new Date(latestWeight.timestamp).toLocaleDateString() : 'Pending Weigh', unit: t('common.kg'), isLarge: true },
-                { label: 'Previous Weigh', value: previousWeight ? previousWeight.weight.toFixed(1) : '—', sub: previousWeight ? new Date(previousWeight.timestamp).toLocaleDateString() : 'N/A', unit: t('common.kg') },
-                { 
-                  label: 'Total Weight Gain', 
-                  value: totalGained >= 0 ? `+${totalGained.toFixed(1)}` : totalGained.toFixed(1), 
-                  sub: `${growthPercentage >= 0 ? `+${growthPercentage.toFixed(1)}%` : `${growthPercentage.toFixed(1)}%`} Overall Growth`,
-                  unit: t('common.kg'),
-                  isDelta: true,
-                  isPositive: totalGained >= 0
-                },
-                { label: 'Avg Daily Gain (ADG)', value: `+${adg.toFixed(2)}`, sub: `kg/day over past ${daysCycle} days`, unit: '', isADG: true }
-              ].map((item, idx) => (
-                <Grid item xs={12} sm={6} md={3} key={idx}>
-                  <Box sx={{ p: 2.5, bgcolor: 'action.hover', borderRadius: 3, border: '1px solid', borderColor: 'divider', height: '100%', display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
-                    <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 800, fontSize: '0.5625rem', textTransform: 'uppercase', display: 'block', mb: 1, letterSpacing: '0.04em' }}>
-                      {item.label}
-                    </Typography>
-                    
-                    <Box sx={{ display: 'flex', alignItems: 'baseline', gap: 0.5, my: 0.75 }}>
-                      {item.isDelta ? (
-                        <Typography 
-                          variant="h5" 
-                          sx={{ 
-                            fontWeight: 900, 
-                            color: item.isPositive ? 'success.main' : 'error.main', 
-                            fontFamily: 'monospace',
-                            display: 'flex',
-                            alignItems: 'center',
-                            gap: 0.5
-                          }}
-                        >
-                          {item.isPositive ? <TrendingUp size={16} /> : <TrendingDown size={16} />}
-                          {item.value}
-                        </Typography>
-                      ) : (
-                        <Typography variant="h5" sx={{ fontWeight: 900, color: item.isADG ? 'primary.main' : 'text.primary', fontFamily: 'monospace' }}>
-                          {item.value}
-                        </Typography>
-                      )}
-                      {item.unit && (
-                        <Typography variant="caption" sx={{ color: 'text.secondary', fontWeight: 'bold' }}>
-                          {item.unit}
-                        </Typography>
-                      )}
-                    </Box>
+      {/* Row 3: Growth Log & Timeline */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+        
+        {/* Historical Growth Log */}
+        <Card className="h-[280px]" sx={{ p: 3, borderRadius: 4, border: '1px solid', borderColor: 'divider', boxShadow: '0 4px 12px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column' }}>
+          <Typography variant="subtitle2" sx={{ fontWeight: 800, textTransform: 'uppercase', color: 'text.primary', letterSpacing: '0.08em', mb: 2 }}>
+            Historical Growth Log Representation Curve
+          </Typography>
+          <Box sx={{ flex: 1, minHeight: 0, overflow: 'hidden', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            {renderGrowthSvgChart()}
+          </Box>
+        </Card>
 
-                    <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block', fontSize: '0.625rem', fontWeight: 600 }}>
-                      {item.sub}
-                    </Typography>
-                  </Box>
-                </Grid>
-              ))}
-            </Grid>
-
-            {/* Trajectory plot paper container */}
-            <Box sx={{ p: 3, bgcolor: 'action.hover', borderRadius: 3, border: '1px solid', borderColor: 'divider', display: 'flex', flexDirection: 'column', gap: 2 }}>
-              <Typography variant="caption" sx={{ fontWeight: 800, textTransform: 'uppercase', color: 'text.primary', letterSpacing: '0.08em' }}>
-                Historical Growth Log Representation Curve
-              </Typography>
-              {renderGrowthSvgChart()}
-            </Box>
-
-          </Card>
-
-          {/* Historical timeline logs ledger Card */}
-          <Card sx={{ p: 4, borderRadius: 4, border: '1px solid', borderColor: 'divider', boxShadow: '0 4px 12px rgba(0,0,0,0.02)' }}>
-            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1 }}>
-              <Clock className="text-[#2E7D32]" size={20} />
-              <Typography variant="subtitle1" sx={{ fontWeight: 800, color: 'text.primary' }}>
-                Historic Weight Check-ins Timeline
-              </Typography>
-            </Box>
-            <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block', mb: 3 }}>
-              Full chronological ledger tracing stable loads associated with {cow.name}.
+        {/* Historic Weight Check-ins Timeline */}
+        <Card className="h-[280px]" sx={{ p: 3, borderRadius: 4, border: '1px solid', borderColor: 'divider', boxShadow: '0 4px 12px rgba(0,0,0,0.02)', display: 'flex', flexDirection: 'column' }}>
+          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5, mb: 1, shrink: 0 }}>
+            <Clock className="text-[#2E7D32]" size={20} />
+            <Typography variant="subtitle1" sx={{ fontWeight: 800, color: 'text.primary' }}>
+              Historic Weight Check-ins Timeline
             </Typography>
+          </Box>
+          <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block', mb: 2, shrink: 0 }}>
+            Full chronological ledger tracing stable loads associated with {cow.name}.
+          </Typography>
 
-            {/* Styled timeline list component */}
-            <Box sx={{ position: 'relative', pl: 3.5, ml: 2, borderLeft: '2px solid', borderColor: 'divider', py: 1.5, display: 'flex', flexDirection: 'column', gap: 3.5 }}>
+          <Box sx={{ flex: 1, overflowY: 'auto', pr: 1, '&::-webkit-scrollbar': { width: 4 }, '&::-webkit-scrollbar-thumb': { bgcolor: 'rgba(0,0,0,0.2)', borderRadius: 4 } }}>
+            <Box sx={{ position: 'relative', pl: 3.5, ml: 1, borderLeft: '2px solid', borderColor: 'divider', py: 1.5, display: 'flex', flexDirection: 'column', gap: 3.5 }}>
               {cowWeights.length === 0 ? (
                 <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block', py: 1 }}>
                   No weights reported on this animal registry file yet.
@@ -496,45 +475,42 @@ export default function CowDetailView({
               ) : (
                 [...cowWeights].reverse().map((rec, i) => (
                   <Box key={rec.id || i} sx={{ position: 'relative' }}>
-                    {/* Circle time pin node */}
                     <Box sx={{ 
                       position: 'absolute', 
-                      left: -37, 
+                      left: -33, 
                       top: 4, 
                       width: 10, 
                       height: 10, 
                       borderRadius: '50%', 
                       bgcolor: 'success.main',
-                      border: '3px solid',
+                      border: '2px solid',
                       borderColor: 'background.paper',
-                      boxShadow: '0 0 0 2px #E8F3F1'
+                      boxShadow: '0 0 0 2px var(--mui-palette-divider)'
                     }} />
                     
-                    <Box sx={{ display: 'flex', flexDirection: { xs: 'column', sm: 'row' }, sm: 'alignItems: center', justify: 'space-between', gap: 1.5 }}>
+                    <Box sx={{ display: 'flex', flexDirection: 'row', alignItems: 'center', justifyContent: 'space-between', gap: 1.5 }}>
                       <Box>
                         <Typography variant="subtitle2" sx={{ fontWeight: 950, color: 'text.primary', fontFamily: 'monospace' }}>
                           {rec.weight.toFixed(1)} {t('common.kg')}
                         </Typography>
-                        <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block', mt: 0.25, fontMono: 'monospace', fontSize: '0.6875rem' }}>
-                          Device: {rec.deviceId} • Stable: {rec.stable ? 'YES (Verified)' : 'NO (Manual Override)'}
+                        <Typography variant="caption" sx={{ color: 'text.secondary', display: 'block', mt: 0.25, fontFamily: 'monospace', fontSize: '0.625rem' }}>
+                          Device: {rec.deviceId} • Stable: {rec.stable ? 'YES' : 'NO'}
                         </Typography>
                       </Box>
                       
                       <Box sx={{ 
-                        fontSize: '0.6875rem', 
+                        fontSize: '0.625rem', 
                         fontWeight: 700, 
                         color: 'text.secondary', 
                         bgcolor: 'action.hover', 
-                        px: 2, 
-                        py: 0.75, 
+                        px: 1.5, 
+                        py: 0.5, 
                         borderRadius: 1.5, 
                         border: '1px solid',
                         borderColor: 'divider',
-                        textTransform: 'uppercase',
-                        alignSelf: { xs: 'flex-start', sm: 'center' }
+                        textTransform: 'uppercase'
                       }}>
                         {new Date(rec.timestamp).toLocaleString(undefined, { 
-                          year: 'numeric', 
                           month: 'short', 
                           day: 'numeric', 
                           hour: '2-digit', 
@@ -546,12 +522,10 @@ export default function CowDetailView({
                 ))
               )}
             </Box>
+          </Box>
+        </Card>
 
-          </Card>
-
-        </Grid>
-
-      </Grid>
+      </div>
 
     </Box>
   );

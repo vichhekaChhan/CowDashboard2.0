@@ -472,10 +472,8 @@ export default function LiveScaleView({
                                 )}
                               </ListItemIcon>
                               <ListItemText 
-                                primary={cow.name}
-                                secondary={`${cow.cowId} • ${cow.breed}`}
-                                primaryTypographyProps={{ variant: 'body2', fontWeight: isSelected ? 800 : 600, fontSize: '0.8125rem' }}
-                                secondaryTypographyProps={{ variant: 'caption', fontSize: '0.625rem' }}
+                                primary={<Typography variant="body2" sx={{ fontWeight: isSelected ? 800 : 600, fontSize: '0.8125rem' }}>{cow.name}</Typography>}
+                                secondary={<Typography variant="caption" sx={{ fontSize: '0.625rem', color: 'text.secondary' }}>{cow.cowId} • {cow.breed}</Typography>}
                               />
                               {isSelected && <Check size={16} className="text-[#2E7D32]" />}
                             </ListItemButton>
