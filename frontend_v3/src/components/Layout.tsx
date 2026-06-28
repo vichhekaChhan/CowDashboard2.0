@@ -1,13 +1,13 @@
 import React from 'react';
 import { useTranslation } from 'react-i18next';
-import { 
-  LayoutDashboard, 
-  Scale, 
-  Users, 
-  History, 
-  FileText, 
-  BarChart3, 
-  Settings, 
+import {
+  LayoutDashboard,
+  Scale,
+  Users,
+  History,
+  FileText,
+  BarChart3,
+  Settings,
   Bell,
   Radio,
   MapPin,
@@ -16,18 +16,18 @@ import {
   Moon
 } from 'lucide-react';
 import { changeLanguage } from '../i18n';
-import { 
-  Box, 
-  Drawer, 
-  AppBar, 
-  Toolbar, 
-  List, 
-  ListItem, 
-  ListItemButton, 
-  ListItemIcon, 
-  ListItemText, 
-  Typography, 
-  Button, 
+import {
+  Box,
+  Drawer,
+  AppBar,
+  Toolbar,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemIcon,
+  ListItemText,
+  Typography,
+  Button,
   Badge,
   IconButton
 } from '@mui/material';
@@ -121,24 +121,24 @@ export default function Layout({
                     <ListItemIcon sx={{ minWidth: 32, color: 'inherit' }}>
                       <item.icon size={18} />
                     </ListItemIcon>
-                    <ListItemText 
+                    <ListItemText
                       primary={
                         <Typography variant="body2" sx={{ fontWeight: isActive ? 700 : 500, fontSize: '0.8125rem' }}>
                           {item.label}
                         </Typography>
-                      } 
+                      }
                     />
                     {item.id === 'dashboard' && alertCount > 0 && (
-                      <Badge 
-                        badgeContent={alertCount} 
-                        color="error" 
-                        sx={{ 
-                          '& .MuiBadge-badge': { 
-                            fontSize: '0.625rem', 
-                            height: 20, 
-                            minWidth: 20 
-                          } 
-                        }} 
+                      <Badge
+                        badgeContent={alertCount}
+                        color="error"
+                        sx={{
+                          '& .MuiBadge-badge': {
+                            fontSize: '0.625rem',
+                            height: 20,
+                            minWidth: 20
+                          }
+                        }}
                       />
                     )}
                   </ListItemButton>
@@ -150,68 +150,68 @@ export default function Layout({
 
         {/* Sidebar Footer & language toggle */}
         <Box sx={{ p: 2, borderTop: '1px solid', borderColor: 'divider' }}>
-           <Button
-             onClick={handleLanguageToggle}
-             fullWidth
-             variant="text"
-             sx={{
-               display: 'flex',
-               alignItems: 'center',
-               justifyContent: 'space-between',
-               px: 2,
-               py: 1,
-               borderRadius: 2,
-               bgcolor: 'rgba(46, 125, 50, 0.06)',
-               color: 'primary.main',
-               textTransform: 'none',
-               '&:hover': {
-                 bgcolor: 'rgba(46, 125, 50, 0.12)',
-               },
-             }}
-           >
-              <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                 <Globe size={14} />
-                 <Typography variant="caption" sx={{ fontWeight: 800, fontSize: '0.625rem' }}>
-                   {i18n.language === 'en' ? 'ENGLISH (UK)' : 'ភាសាខ្មែរ'}
-                 </Typography>
-              </Box>
-              <Typography variant="caption" sx={{ fontSize: '0.5625rem', opacity: 0.6 }}>
-                {i18n.language === 'en' ? 'SWITCH TO KM' : 'ប្តូរជា EN'}
+          <Button
+            onClick={handleLanguageToggle}
+            fullWidth
+            variant="text"
+            sx={{
+              display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'space-between',
+              px: 2,
+              py: 1,
+              borderRadius: 2,
+              bgcolor: 'rgba(46, 125, 50, 0.06)',
+              color: 'primary.main',
+              textTransform: 'none',
+              '&:hover': {
+                bgcolor: 'rgba(46, 125, 50, 0.12)',
+              },
+            }}
+          >
+            <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
+              <Globe size={14} />
+              <Typography variant="caption" sx={{ fontWeight: 800, fontSize: '0.625rem' }}>
+                {i18n.language === 'en' ? 'ENGLISH (UK)' : 'ភាសាខ្មែរ'}
               </Typography>
-           </Button>
-           <Typography variant="caption" sx={{ display: 'block', mt: 2, textAlign: 'center', color: 'text.secondary', fontFamily: 'monospace', fontSize: '0.5625rem' }}>
-             © 2026 AGROSCALE CO.
-           </Typography>
+            </Box>
+            <Typography variant="caption" sx={{ fontSize: '0.5625rem', opacity: 0.6 }}>
+              {i18n.language === 'en' ? 'SWITCH TO KM' : 'ប្តូរជា EN'}
+            </Typography>
+          </Button>
+          <Typography variant="caption" sx={{ display: 'block', mt: 2, textAlign: 'center', color: 'text.secondary', fontFamily: 'monospace', fontSize: '0.5625rem' }}>
+            © 2026 AGROSCALE CO.
+          </Typography>
         </Box>
       </Drawer>
 
       {/* Main Content Pane */}
       <Box component="main" sx={{ flexGrow: 1, display: 'flex', flexDirection: 'column', minWidth: 0, overflow: 'hidden' }}>
         {/* Top Header App Bar */}
-        <AppBar 
-          position="static" 
-          color="inherit" 
-          elevation={0} 
-          sx={{ 
-            borderBottom: '1px solid', 
-            borderColor: 'divider', 
+        <AppBar
+          position="static"
+          color="inherit"
+          elevation={0}
+          sx={{
+            borderBottom: '1px solid',
+            borderColor: 'divider',
             bgcolor: 'background.paper',
-            zIndex: (theme) => theme.zIndex.drawer + 1 
+            zIndex: (theme) => theme.zIndex.drawer + 1
           }}
         >
           <Toolbar sx={{ justifyContent: 'flex-end', px: { xs: 3, md: 5 }, minHeight: 64 }}>
             {/* Right side icons */}
             <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-               <IconButton 
-                 size="small" 
-                 sx={{ color: 'text.secondary' }}
-                 onClick={() => onChangeTheme?.(theme === 'dark' ? 'light' : 'dark')}
-               >
-                 {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
-               </IconButton>
-               <IconButton size="small" sx={{ color: 'text.secondary' }}>
-                 <Bell size={20} />
-               </IconButton>
+              <IconButton
+                size="small"
+                sx={{ color: 'text.secondary' }}
+                onClick={() => onChangeTheme?.(theme === 'dark' ? 'light' : 'dark')}
+              >
+                {theme === 'dark' ? <Sun size={20} /> : <Moon size={20} />}
+              </IconButton>
+              <IconButton size="small" sx={{ color: 'text.secondary' }}>
+                <Bell size={20} />
+              </IconButton>
             </Box>
           </Toolbar>
         </AppBar>
