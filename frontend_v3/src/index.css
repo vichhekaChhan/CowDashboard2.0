@@ -25,6 +25,42 @@
   --status-unstable-text: #ef6c00;
 }
 
+[data-theme="dark"] {
+  --bg-app: #121212;
+  --bg-card: #1E1E1E;
+  --text-primary: #ffffff;
+  --text-secondary: #9CA3AF;
+  --border-ui: #2D3748;
+  
+  --primary-brand: #81c784;
+  --primary-brand-hover: #a5d6a7;
+  --secondary-brand: #2e7d32;
+  --accent-light: #1b5e20;
+  
+  --status-stable-bg: #133029;
+  --status-stable-text: #a5d6a7;
+  --status-unstable-bg: #4a2100;
+  --status-unstable-text: #ffb74d;
+}
+
+[data-theme="farm"] {
+  --bg-app: #F9FAFB;
+  --bg-card: #ffffff;
+  --text-primary: #111827;
+  --text-secondary: #6B7280;
+  --border-ui: #F3F4F6;
+  
+  --primary-brand: #1E4A40;
+  --primary-brand-hover: #133029;
+  --secondary-brand: #A5D6A7;
+  --accent-light: #e8f0ee;
+  
+  --status-stable-bg: #E8F5E9;
+  --status-stable-text: #1E4A40;
+  --status-unstable-bg: #FCE8E6;
+  --status-unstable-text: #EA4335;
+}
+
 body {
   background-color: var(--bg-app);
   color: var(--text-primary);
@@ -38,7 +74,7 @@ h1, h2, h3, .khmer-moul {
 }
 
 .human-card {
-  background: white;
+  background: var(--bg-card);
   border-radius: 1.5rem;
   padding: 1.5rem;
   border: 1px solid var(--border-ui);
@@ -61,7 +97,7 @@ h1, h2, h3, .khmer-moul {
 
 .sidebar-nav-item.active {
   background-color: var(--primary-brand);
-  color: white;
+  color: var(--bg-card);
 }
 
 .sidebar-nav-item:hover:not(.active) {

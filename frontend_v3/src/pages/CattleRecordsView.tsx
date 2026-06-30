@@ -16,7 +16,7 @@ import {
   Activity,
   Users
 } from 'lucide-react';
-import { Cow, WeightRecord } from '../../types';
+import { Cow, WeightRecord } from '../types';
 import { 
   Box, 
   Grid, 

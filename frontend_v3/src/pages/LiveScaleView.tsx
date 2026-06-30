@@ -12,7 +12,7 @@ import {
   History,
   Sparkles
 } from 'lucide-react';
-import { Cow, LiveScaleState, Device } from '../../types.js';
+import { Cow, LiveScaleState, Device } from '../types';
 import { 
   Box, 
   Grid, 

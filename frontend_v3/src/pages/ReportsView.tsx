@@ -13,7 +13,7 @@ import {
   TrendingUp as GainIcon,
   TrendingDown as LossIcon
 } from 'lucide-react';
-import { ReportData } from '../../types.js';
+import { ReportData } from '../types';
 import { 
   Box, 
   Grid, 

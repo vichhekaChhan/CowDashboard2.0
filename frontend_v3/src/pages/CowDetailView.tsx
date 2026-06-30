@@ -13,7 +13,7 @@ import {
   Tag,
   Clock
 } from 'lucide-react';
-import { Cow, WeightRecord } from '../../types.js';
+import { Cow, WeightRecord } from '../types';
 import { 
   Box, 
   Grid, 

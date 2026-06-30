@@ -14,7 +14,7 @@ import {
   HelpCircle,
   X
 } from 'lucide-react';
-import { WeightRecord, Cow } from '../../types.js';
+import { WeightRecord, Cow } from '../types';
 import { 
   Box, 
   Grid, 

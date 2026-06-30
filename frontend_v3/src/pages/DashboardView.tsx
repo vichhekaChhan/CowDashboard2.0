@@ -6,7 +6,7 @@ import {
   ArrowUpRight,
   ArrowDownRight
 } from 'lucide-react';
-import { DashboardStats, RecentActivity } from '../../types';
+import { DashboardStats, RecentActivity } from '../types';
 import { 
   Box, 
   Grid, 

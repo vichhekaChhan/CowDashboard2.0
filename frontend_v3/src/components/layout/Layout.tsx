@@ -15,7 +15,7 @@ import {
   Sun,
   Moon
 } from 'lucide-react';
-import { changeLanguage } from '../i18n';
+import { changeLanguage } from '../../i18n';
 import {
   Box,
   Drawer,

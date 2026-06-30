@@ -11,7 +11,7 @@ import {
   LineChart,
   Grid
 } from 'lucide-react';
-import { Cow, WeightRecord } from '../../types.js';
+import { Cow, WeightRecord } from '../types';
 import { 
   Box, 
   Grid as MuiGrid, 

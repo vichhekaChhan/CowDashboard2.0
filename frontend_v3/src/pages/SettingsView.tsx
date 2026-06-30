@@ -23,8 +23,8 @@ import {
   Activity,
   CheckCircle2
 } from 'lucide-react';
-import { Device } from '../../types.js';
-import { changeLanguage } from '../../i18n.js';
+import { Device } from '../types';
+import { changeLanguage } from '../i18n';
 import { 
   Box, 
   Grid, 
