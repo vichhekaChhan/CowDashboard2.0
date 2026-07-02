@@ -1,6 +1,33 @@
 # Quick Start Guide
 
-## 1. Start Backend (Terminal 1)
+## 🐳 One-Click Docker Startup (Recommended)
+
+If you have Docker installed, you can start the entire stack (MySQL Database, Backend, and Frontend) and automatically open the website in your browser with a single command/click:
+
+### On Windows
+Double-click **`start.bat`** in the root directory.
+
+### On macOS / Linux / WSL
+Run the following command in your terminal:
+```bash
+./start.sh
+```
+
+This script will:
+1. Build and launch all services in Docker.
+2. Wait for the frontend to be fully ready.
+3. Automatically open the dashboard at `http://localhost:3000` in your browser.
+
+To stop the services later, run:
+```bash
+docker compose down
+```
+
+---
+
+## Manual Startup (Without Docker)
+
+### 1. Start Backend (Terminal 1)
 ```bash
 cd Dashboard/backend
 npm install

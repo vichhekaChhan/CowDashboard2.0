@@ -106,7 +106,22 @@ Health check endpoint.
 
 ## Setup Instructions
 
-### Prerequisites
+### Option A: One-Click Docker Setup (Recommended)
+
+If you have Docker Desktop installed:
+- **Windows:** Double-click **`start.bat`** in the root directory.
+- **macOS / Linux / WSL:** Run `./start.sh` in your terminal.
+
+This builds and launches the React frontend (port 3000), Express backend (port 3002), and MySQL database, then automatically opens `http://localhost:3000` in your browser.
+
+To stop the services, run:
+```bash
+docker compose down
+```
+
+### Option B: Manual Setup (Without Docker)
+
+#### Prerequisites
 - Node.js (v14+) and npm
 - ESP32 with HX711 sketch configured
 

@@ -11,6 +11,13 @@ A complete full-stack dashboard system for real-time weight monitoring from ESP3
 
 ## 🚀 Quick Start
 
+### Docker Setup (One-Click)
+- **Windows:** Double-click `start.bat`
+- **macOS/Linux/WSL:** Run `./start.sh`
+
+This automatically builds, starts everything (DB, Backend, Frontend) and opens the dashboard at `http://localhost:3000`.
+
+### Manual Setup (Without Docker)
 1. **Backend:**
    ```bash
    cd backend && npm install && npm start
@@ -18,7 +25,7 @@ A complete full-stack dashboard system for real-time weight monitoring from ESP3
 
 2. **Frontend (new terminal):**
    ```bash
-   cd frontend && npm install && npm start
+   cd frontend_v3 && npm install && npm start
    ```
 
 3. **Update ESP32** with your PC's IP in sketch
